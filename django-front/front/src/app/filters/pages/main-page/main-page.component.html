@@ -1,0 +1,89 @@
+<!-- Contenedor principal para centrar el contenido de la cuadrícula -->
+<div class="grid justify-content-center align-items-center">
+
+  <!-- COMPONENTE PARA SUBIR LA IMAGEN, CONVOLUCIONAR Y PREVISUALIZAR -->
+  <div class="col-12 lg:col-6 col-12 lg:col-6">
+    <div class="card flex align-items-center justify-content-center">
+      <app-upload-file
+        [canUpload]="canUpload"
+        [kernel]="kernel"
+        [sigma]="sigma"
+        [selectedFilter]="selectedFilter"
+        (onImageSrcOut)="loadImageSrcOut($event)"
+        (onImageConvIn)="loadImageConvIn($event)"
+        (onIsLoading)="loadIsLoading($event)"
+      ></app-upload-file>
+    </div>
+  </div>
+
+  <!-- BOTONES PARA ESTABLECER PARAMETROS DE LOS FILTROS  -->
+  <div class="col-12 lg:col-6 col-12 lg:col-6 animate__animated animate__fadeIn">
+    <div class="card">
+      <div class="card flex justify-content-center my-5">
+        <p-dropdown [disabled]="isLoading" [options]="filters" (onChange)="actualFiler($event)" [(ngModel)]="selectedFilter" optionLabel="name"
+          [showClear]="true" placeholder="Selecciona un filtro"></p-dropdown>
+      </div>
+      <div class="card flex justify-content-center my-5">
+        <span class="p-float-label">
+          <p-inputNumber
+              pTooltip="Solo Valores Impares"
+              (onInput)="oddValues($event)"
+              (onBlur)="onBlur($event)"
+              [(ngModel)]="kernel"
+              [showButtons]="true"
+              inputId="stacked"
+              [step]="2"
+              [min]="1"
+              [max]="99"
+             > </p-inputNumber>
+          <label>Kernel</label>
+        </span>
+      </div>
+      <div class="card flex justify-content-center my-5">
+        <span class="p-float-label">
+          <p-inputNumber
+            [disabled]="isMedian"
+            [(ngModel)]="sigma"
+            [showButtons]="true"
+            (onBlur)="onBlur($event)"
+            inputId="stacked"
+            [step]="1"
+            [min]="1"
+            [max]="99"
+            >
+          </p-inputNumber>
+          <label>Sigma</label>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="col-12 flex justify-content-center mt-5 animate__animated animate__fadeIn" style="flex-direction: column; align-items: center;">
+    <h3>Cargando Resultados</h3>
+    <img
+      src="assets/loader.svg"
+      alt="loader"
+      class="mt-3"
+      height="75"
+      width="75" />
+  </div>
+
+  <div *ngIf="!isLoading" class="col-12 flex justify-content-center mt-5 animate__animated animate__fadeIn" style=" align-items: center;">
+    <!-- IMAGEN ORIGINAL E IMAGEN RESULTADO -->
+    <div *ngIf="imageSrcOut" class="col-12 lg:col-6">
+      <!-- Componente que muestra la imagen original -->
+      <div class="">
+        <app-card-image-original [image]="imageConvIn"></app-card-image-original>
+      </div>
+    </div>
+    <div *ngIf="imageSrcOut" class="col-12 lg:col-6">
+      <!-- Componente que muestra la imagen resultante -->
+      <app-card-image-conv [image]="imageSrcOut"></app-card-image-conv>
+    </div>
+  </div>
+
+
+
+
+
+</div>

@@ -1,0 +1,19 @@
+<div class="card flex justify-content-center">
+  <p-card header="Imagen Preprocesada" [subheader]="image.index" [style]="{ width: '250px' }">
+    <ng-template pTemplate="header">
+      <div class="card flex justify-content-center mt-5">
+        <p-image [src]="image.image" [preview]="true" alt="Image" width="250"></p-image>
+      </div>
+    </ng-template>
+    <p-accordion>
+      <p-accordionTab header="Información">
+        <p>Filtro: {{ image.method }}</p>
+        <p>Tiempo: {{ image.time | number:'1.2-4' }} seg</p>
+        <p>N. Bloques: {{ image.number_of_blocks }}</p>
+        <p>N. Hilos: {{ image.thread_per_block }}</p>
+        <p>Máscara: {{ image.kernel }}</p>
+        <p>Sigma: {{ image.sigma }}</p>
+      </p-accordionTab>
+    </p-accordion>
+  </p-card>
+</div>

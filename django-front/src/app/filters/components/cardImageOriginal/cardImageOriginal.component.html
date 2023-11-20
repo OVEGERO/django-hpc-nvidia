@@ -1,0 +1,9 @@
+<div class="card flex justify-content-center">
+  <p-card header="Imagen Original" [subheader]="image.index" [style]="{ width: '250px' }">
+    <ng-template pTemplate="header">
+      <div class="card flex justify-content-center mt-5">
+        <p-image *ngIf="image" [src]="image.image" [preview]="true" alt="Image" width="250"></p-image>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

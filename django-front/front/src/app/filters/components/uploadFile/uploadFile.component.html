@@ -1,0 +1,23 @@
+<p-toast></p-toast>
+<p-fileUpload
+  class="animate__animated animate__fadeIn"
+  name="demo[]"
+  (onUpload)="onUpload($event)"
+  (onSelect)="indexImages($event)"
+  (onRemove)="removeImage($event)"
+  (onProgress)="onProgress($event)"
+  [showUploadButton]="canUpload"
+  [disabled]="disabled"
+  url="https://www.primefaces.org/cdn/api/upload.php"
+  [multiple]="false"
+  accept="image/*"
+  uploadLabel="Subir"
+  cancelLabel="Cancelar"
+  chooseLabel="Elegir"
+  [maxFileSize]="10000000">
+  <ng-template pTemplate="content">
+    <ul *ngIf="uploadedFiles.length">
+      <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+    </ul>
+  </ng-template>
+</p-fileUpload>
